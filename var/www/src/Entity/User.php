@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'user')]
+#[ORM\Index(columns: ['valid_email'], name: 'valid_email_idx')]
 class User
 {
     #[ORM\Id()]
@@ -23,17 +24,14 @@ class User
     #[ORM\Column(type: Types::STRING, length:255)]
     private string $email;
     
-    #[ORM\Column(type:Types::INTEGER, length:11)]
-    private int $validts;
-    
     #[ORM\Column(type: Types::BOOLEAN, options:['default' => false])]
-    private bool $confirmed;
+    private bool $confirmed_email;
 
     #[ORM\Column(type: Types::BOOLEAN, options:['default' => false])]
-    private bool $checked;
+    private bool $checked_email;
     
     #[ORM\Column(type: Types::BOOLEAN, options:['default' => false])]
-    private bool $valid;
+    private bool $valid_email;
     
     public function getId(): int
     {
@@ -68,47 +66,36 @@ class User
         return $this;
     }
     
-    public function getValidts(): int
+    public function isConfirmedEmail(): bool
     {
-        return $this->validts;
+        return $this->confirmed_email;
     }
     
-    public function setValidts(int $validts): User
+    public function setConfirmedEmail(bool $confirmed_email): User
     {
-        $this->validts = $validts;
+        $this->confirmed_email = $confirmed_email;
         return $this;
     }
     
-    public function isConfirmed(): bool
+    public function isCheckedEmail(): bool
     {
-        return $this->confirmed;
+        return $this->checked_email;
     }
     
-    public function setConfirmed(bool $confirmed): User
+    public function setCheckedEmail(bool $checked_email): User
     {
-        $this->confirmed = $confirmed;
+        $this->checked_email = $checked_email;
         return $this;
     }
     
-    public function isChecked(): bool
+    public function isValidEmail(): bool
     {
-        return $this->checked;
+        return $this->valid_email;
     }
     
-    public function setChecked(bool $checked): User
+    public function setValidEmail(bool $valid_email): User
     {
-        $this->checked = $checked;
-        return $this;
-    }
-    
-    public function isValid(): bool
-    {
-        return $this->valid;
-    }
-    
-    public function setValid(bool $valid): User
-    {
-        $this->valid = $valid;
+        $this->valid_email = $valid_email;
         return $this;
     }
 }

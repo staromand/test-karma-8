@@ -4,9 +4,6 @@ services:
   php-fpm:
     build:
       context: docker/images/php
-    networks:
-      - nginx-network
-      - default
     volumes:
       - ./var/www:/var/www
       - ./docker/data/php-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf
@@ -23,8 +20,3 @@ services:
       - TZ=${TZ}
     ports:
       - 3396:3306
-
-networks:
-  nginx-network:
-    name: nginx-network
-    external: true

@@ -1,0 +1,8 @@
+/**/vendor/
+/**/cache/
+/**/logs/
+.idea
+
+.DS_Store
+.bashrc
+.editorconfig

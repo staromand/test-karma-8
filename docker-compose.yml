@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  php-fpm:
+    build:
+      context: docker/images/php
+    networks:
+      - nginx-network
+      - default
+    volumes:
+      - ./var/www:/var/www
+      - ./docker/data/php-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf
+    environment:
+      PHP_IDE_CONFIG: serverName=karma-8-php-fpm
+
+  mysql:
+    image: mysql:8
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=${TZ}
+    ports:
+      - 3396:3306
+
+networks:
+  nginx-network:
+    name: nginx-network
+    external: true

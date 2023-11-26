@@ -3,35 +3,36 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\UserSubscribeRepository;
+use App\Repository\UserSubscriptionRepository;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UserSubscribeRepository::class)]
+#[ORM\Entity(repositoryClass: UserSubscriptionRepository::class)]
 #[ORM\Table(name: 'user_subscription')]
-class UserSubscribe
+class UserSubscription
 {
-    #[ORM\Id()]
+    #[ORM\Id]
     #[ORM\Column(type: Types::INTEGER)]
-    #[ORM\GeneratedValue()]
+    #[ORM\GeneratedValue]
     private int $id;
     
     #[ORM\ManyToOne(targetEntity: User::class, fetch:'EAGER')]
     #[ORM\JoinColumn(name:'user_id', onDelete: 'CASCADE')]
     private User $user;
     
-    #[ORM\Column(type:Types::STRING, length:255)]
+    #[ORM\Column(type:Types::STRING, length: AbstractMySQLPlatform::LENGTH_LIMIT_TINYTEXT)]
     private string $someDataOfSubscription;
     
     #[ORM\Column(type:Types::INTEGER, length:11)]
-    private int $validts;
+    private int $validTs;
     
     public function getId(): int
     {
         return $this->id;
     }
     
-    public function setId(int $id): UserSubscribe
+    public function setId(int $id): UserSubscription
     {
         $this->id = $id;
         return $this;
@@ -42,7 +43,7 @@ class UserSubscribe
         return $this->user;
     }
     
-    public function setUser(User $user): UserSubscribe
+    public function setUser(User $user): UserSubscription
     {
         $this->user = $user;
         return $this;
@@ -53,20 +54,20 @@ class UserSubscribe
         return $this->someDataOfSubscription;
     }
     
-    public function setSomeDataOfSubscription(string $someDataOfSubscription): UserSubscribe
+    public function setSomeDataOfSubscription(string $someDataOfSubscription): UserSubscription
     {
         $this->someDataOfSubscription = $someDataOfSubscription;
         return $this;
     }
     
-    public function getValidts(): int
+    public function getValidTs(): int
     {
-        return $this->validts;
+        return $this->validTs;
     }
     
-    public function setValidts(int $validts): UserSubscribe
+    public function setValidTs(int $validTs): UserSubscription
     {
-        $this->validts = $validts;
+        $this->validTs = $validTs;
         return $this;
     }
 }

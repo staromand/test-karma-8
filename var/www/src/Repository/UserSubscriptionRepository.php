@@ -6,13 +6,13 @@ namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\UserSubscribe;
+use App\Entity\UserSubscription;
 
 
-class UserSubscribeRepository extends ServiceEntityRepository
+class UserSubscriptionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UserSubscribe::class);
+        parent::__construct($registry, UserSubscription::class);
     }
 }

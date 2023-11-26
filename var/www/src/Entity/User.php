@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,15 +14,15 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(columns: ['valid_email'], name: 'valid_email_idx')]
 class User
 {
-    #[ORM\Id()]
+    #[ORM\Id]
     #[ORM\Column(type: Types::INTEGER)]
-    #[ORM\GeneratedValue()]
+    #[ORM\GeneratedValue]
     private int $id;
     
-    #[ORM\Column(type: Types::STRING, length:255)]
+    #[ORM\Column(type: Types::STRING, length: AbstractMySQLPlatform::LENGTH_LIMIT_TINYTEXT)]
     private string $username;
     
-    #[ORM\Column(type: Types::STRING, length:255)]
+    #[ORM\Column(type: Types::STRING, length: AbstractMySQLPlatform::LENGTH_LIMIT_TINYTEXT)]
     private string $email;
     
     #[ORM\Column(type: Types::BOOLEAN, options:['default' => false])]

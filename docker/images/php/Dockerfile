@@ -46,13 +46,18 @@ RUN echo 'zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902
     && echo "xdebug.client_port=9003" | tee -a /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.start_with_request=yes" | tee -a /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.client_host=host.docker.internal" | tee -a /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.idekey=PHPSTORM" | tee -a /usr/local/etc/php/conf.d/xdebug.ini
+    && echo "xdebug.idekey=PHPSTORM" | tee -a /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.log_level=0" | tee -a /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN set -x ; \
 deluser www-data ; \
 delgroup www-data ; \
 addgroup --gid 82 --system www-data ; \
 adduser --uid 82 --disabled-login --system --ingroup www-data www-data && exit 0 ; exit 1
+
+ENV TZ=Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN printf "[PHP]\ndate.timezone = \"$TZ\"\n" > /usr/local/etc/php/conf.d/tzone.ini
 
 WORKDIR /var/www
 

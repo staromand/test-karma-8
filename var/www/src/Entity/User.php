@@ -26,13 +26,13 @@ class User
     private string $email;
     
     #[ORM\Column(type: Types::BOOLEAN, options:['default' => false])]
-    private bool $confirmed_email;
+    private bool $confirmedEmail;
 
     #[ORM\Column(type: Types::BOOLEAN, options:['default' => false])]
-    private bool $checked_email;
+    private bool $checkedEmail;
     
     #[ORM\Column(type: Types::BOOLEAN, options:['default' => false])]
-    private bool $valid_email;
+    private bool $validEmail;
     
     public function getId(): int
     {
@@ -69,34 +69,34 @@ class User
     
     public function isConfirmedEmail(): bool
     {
-        return $this->confirmed_email;
+        return $this->confirmedEmail;
     }
     
-    public function setConfirmedEmail(bool $confirmed_email): User
+    public function setConfirmedEmail(bool $confirmedEmail): User
     {
-        $this->confirmed_email = $confirmed_email;
+        $this->confirmedEmail = $confirmedEmail;
         return $this;
     }
     
     public function isCheckedEmail(): bool
     {
-        return $this->checked_email;
+        return $this->checkedEmail;
     }
     
-    public function setCheckedEmail(bool $checked_email): User
+    public function setCheckedEmail(bool $checkedEmail): User
     {
-        $this->checked_email = $checked_email;
+        $this->checkedEmail = $checkedEmail;
         return $this;
     }
     
     public function isValidEmail(): bool
     {
-        return $this->valid_email;
+        return $this->validEmail;
     }
     
-    public function setValidEmail(bool $valid_email): User
+    public function setValidEmail(bool $validEmail): User
     {
-        $this->valid_email = $valid_email;
+        $this->validEmail = $validEmail;
         return $this;
     }
 }
